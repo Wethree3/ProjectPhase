@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier Result</title>
+</head>
+<body>
+    <h1>Image Classifier Result</h1>
+    {% for prediction in predictions %}
+        <p>Image: {{ prediction["Image"] }}</p>
+        <p>Predicted Label: {{ prediction["Predicted Label"] }}</p>
+        <hr>
+    {% endfor %}
+</body>
+</html>

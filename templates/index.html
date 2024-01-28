@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px); /* Adjust based on header and footer heights */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        img {
+            max-width: 30%;
+            height: auto;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            margin-top: 20px;
+        }
+
+        /* Error message style */
+        p.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Image Classifier</h1>
+       <b> <p  style="font-size: 1.5em;">Histopathology image classifier</p></b>
+    </header>
+
+    <main>
+        <!-- Your content goes here -->
+        <form method="post" enctype="multipart/form-data">
+            <label for="file">Upload an image:</label>
+            <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+
+        {% if result %}
+            <h2>Result:</h2>
+            <p>Image path: {{ result.image_path }}</p>
+            <p>Predicted Label: {{ result.predicted_label }}</p>
+
+            <!-- Display the uploaded image -->
+            <img src="{{ url_for('static', filename=result.image_path[1:]) }}" alt="Uploaded Image">
+
+            <hr>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
+        <!-- Add any other footer content here -->
+    </footer>
+
+</body>
+</html>
